@@ -2,6 +2,7 @@ const bcrypt = require ('bcryptjs');
 const jwt = require ('jsonwebtoken');
 
 const Model = require ('../models/admin/register.js');
+const staffModel = require ('../models/staff/staff.js');
 
 // register routes
 const register = (req, res, next) => {
@@ -88,6 +89,49 @@ const login = (req, res, next) => {
     });
 };
 
+const staff = (req, res, next) => {
+  // check if user phone already exists
+  staffModel
+    .findOne ({
+      where: {
+        phone: req.body.phone,
+      },
+    })
+    .then (dbUser => {
+      console.log (dbUser);
+      if (dbUser) {
+        return res.status (201).json ({message: 'Phone number already exists'});
+      } else if (req.body.phone) {
+        return staffModel
+          .create ({
+            hotelName: req.body.hotelName,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            phone: req.body.phone,
+            passport: req.body.passport,
+            position: req.body.position,
+            salary: req.body.salary,
+            address: req.body.address,
+            state: req.body.state,
+            promoted: req.body.promoted,
+            comments: req.body.comments,
+          })
+          .then (() => {
+            res
+              .status (200)
+              .json ({message: 'Hotelia Profile successfully created!'});
+            console.log (res.files);
+          })
+          .catch (e => {
+            res.status (502).json ({message: 'Error while registering user'});
+          });
+      }
+    })
+    .catch (err => {
+      console.log ('Error: ' + err);
+    });
+};
+
 const isAuth = (req, res, next) => {
   const authHeader = req.get ('Authorization');
   if (!authHeader) {
@@ -109,4 +153,4 @@ const isAuth = (req, res, next) => {
   }
 };
 
-module.exports = {register, login, isAuth};
+module.exports = {register, login, isAuth, staff};

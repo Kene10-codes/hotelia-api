@@ -3,7 +3,7 @@ const Model = require ('../models/admin/register.js');
 
 const router = express.Router ();
 
-const {register, login, isAuth} = require ('../controllers/auth');
+const {register, login, isAuth, staff} = require ('../controllers/auth');
 
 // register endpoint
 router.post ('/register', register);
@@ -14,14 +14,8 @@ router.post ('/login', login);
 // login endpoint
 router.get ('/private', isAuth);
 
-router.get ('/staff', async (req, res) => {
-  try {
-    const data = await Model.find ();
-    res.status (200).json (data);
-  } catch (e) {
-    res.status (500).json ({message: e.message});
-  }
-});
+// staff profile endpoint
+router.post ('/staff/profile', staff);
 
 router.get ('/getOne/:id', async (req, res) => {
   try {

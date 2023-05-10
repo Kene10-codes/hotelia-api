@@ -1,5 +1,7 @@
 const express = require ('express');
 const mongoose = require ('mongoose');
+const multer = require ('multer');
+const fileUpload = require ('express-fileupload');
 
 const routes = require ('./routes/routes');
 const port = 3000 || 5000;
@@ -37,6 +39,9 @@ app.use ((_, res, req, next) => {
 });
 
 app.use ('/api', routes);
+
+// Use the express-fileupload middleware
+app.use (fileUpload ());
 
 app.listen (port, () => {
   console.log (`Server started at port ${port}`);

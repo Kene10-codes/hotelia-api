@@ -1,6 +1,6 @@
 const mongoose = require ('mongoose');
 
-const profilSchema = new mongoose.Schema ({
+const staffSchema = new mongoose.Schema ({
   hotelName: {
     required: true,
     type: String,
@@ -13,15 +13,15 @@ const profilSchema = new mongoose.Schema ({
     required: true,
     type: String,
   },
+  phone: {
+    required: true,
+    type: Number,
+  },
   passport: {
     required: true,
     type: String,
   },
   position: {
-    required: true,
-    type: String,
-  },
-  otherPosition: {
     required: true,
     type: String,
   },
@@ -47,4 +47,4 @@ const profilSchema = new mongoose.Schema ({
   },
 });
 
-module.exports = mongoose.model ('Profile', profilSchema);
+module.exports = mongoose.model ('Staff', staffSchema);
