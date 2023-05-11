@@ -4,6 +4,8 @@ const jwt = require ('jsonwebtoken');
 const Model = require ('../models/admin/register.js');
 const staffModel = require ('../models/staff/staff.js');
 
+const {upload} = require ('../index.js');
+
 // register routes
 const register = (req, res, next) => {
   // check if user phone already exists

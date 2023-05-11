@@ -43,6 +43,19 @@ app.use ('/api', routes);
 // Use the express-fileupload middleware
 app.use (fileUpload ());
 
+const storage = multer.diskStorage ({
+  destination (req, file, callback) {
+    callback (null, './images');
+  },
+  filename (req, file, callback) {
+    callback (null, `${file.fieldname}_${Date.now ()}_${file.originalname}`);
+  },
+});
+
+const upload = multer ({storage});
+
 app.listen (port, () => {
   console.log (`Server started at port ${port}`);
 });
+
+module.exports = upload;

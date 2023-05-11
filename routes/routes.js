@@ -15,7 +15,7 @@ router.post ('/login', login);
 router.get ('/private', isAuth);
 
 // staff profile endpoint
-router.post ('/staff/profile', staff);
+router.post ('/staff-upload', staff);
 
 router.get ('/getOne/:id', async (req, res) => {
   try {
