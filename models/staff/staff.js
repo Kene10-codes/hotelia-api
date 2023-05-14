@@ -5,11 +5,7 @@ const staffSchema = new mongoose.Schema ({
     required: true,
     type: String,
   },
-  firstName: {
-    required: true,
-    type: String,
-  },
-  lastName: {
+  name: {
     required: true,
     type: String,
   },
@@ -40,10 +36,6 @@ const staffSchema = new mongoose.Schema ({
   promoted: {
     required: true,
     type: Boolean,
-  },
-  comments: {
-    required: true,
-    type: String,
   },
 });
 

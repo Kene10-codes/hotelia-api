@@ -107,16 +107,14 @@ const staff = (req, res, next) => {
         return staffModel
           .create ({
             hotelName: req.body.hotelName,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
+            name: req.body.name,
             phone: req.body.phone,
             passport: req.body.passport,
             position: req.body.position,
             salary: req.body.salary,
             address: req.body.address,
             state: req.body.state,
-            promoted: req.body.promoted,
-            comments: req.body.comments,
+            promoted: req.body.promoted
           })
           .then (() => {
             res
