@@ -17,6 +17,8 @@ router.get ('/private', isAuth);
 // staff profile endpoint
 router.post ('/staff-upload', staff);
 
+// get all staff
+// router.get('/get-staff', allStaff)
 router.get ('/getOne/:id', async (req, res) => {
   try {
     const data = await Model.findById (req.params.id);

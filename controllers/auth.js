@@ -114,13 +114,11 @@ const staff = (req, res, next) => {
             salary: req.body.salary,
             address: req.body.address,
             state: req.body.state,
-            promoted: req.body.promoted
           })
           .then (() => {
             res
               .status (200)
               .json ({message: 'Hotelia Profile successfully created!'});
-            console.log (res.files);
           })
           .catch (e => {
             res.status (502).json ({message: 'Error while registering user'});

@@ -33,10 +33,6 @@ const staffSchema = new mongoose.Schema ({
     required: true,
     type: String,
   },
-  promoted: {
-    required: true,
-    type: Boolean,
-  },
 });
 
 module.exports = mongoose.model ('Staff', staffSchema);
