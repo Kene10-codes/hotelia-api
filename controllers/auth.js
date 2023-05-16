@@ -100,7 +100,6 @@ const staff = (req, res, next) => {
       },
     })
     .then (dbUser => {
-      console.log (dbUser);
       if (dbUser) {
         return res.status (201).json ({message: 'Phone number already exists'});
       } else if (req.body.phone) {
