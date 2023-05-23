@@ -4,7 +4,7 @@ const jwt = require ('jsonwebtoken');
 const Model = require ('../models/admin/register.js');
 const staffModel = require ('../models/staff/staff.js');
 
-const {upload} = require ('../index.js');
+const upload = require ('../index.js');
 
 // register routes
 const register = (req, res, next) => {
@@ -108,7 +108,7 @@ const staff = (req, res, next) => {
             hotelName: req.body.hotelName,
             name: req.body.name,
             phone: req.body.phone,
-            passport: req.body.passport,
+            passport: req.file.passport,
             position: req.body.position,
             salary: req.body.salary,
             address: req.body.address,
@@ -126,6 +126,18 @@ const staff = (req, res, next) => {
     })
     .catch (err => {
       console.log ('Error: ' + err);
+    });
+};
+
+const allStaff = async (req, res, next) => {
+  staffModel
+    .find ()
+    .then (staff => {
+      res.send (staff);
+      // res.status (200).json ({message: 'Staff data fetched successfully'});
+    })
+    .catch (err => {
+      res.status (500).json ({message: 'Error while fetching staff'});
     });
 };
 
@@ -150,4 +162,4 @@ const isAuth = (req, res, next) => {
   }
 };
 
-module.exports = {register, login, isAuth, staff};
+module.exports = {register, login, isAuth, staff, allStaff};

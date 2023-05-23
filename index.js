@@ -38,21 +38,25 @@ app.use ((_, res, req, next) => {
   next ();
 });
 
+app.use (express.json ());
+app.use (express.urlencoded ({extended: true}));
+app.use (express.static (__dirname + '/public'));
+app.use ('/uploads', express.static ('uploads'));
 app.use ('/api', routes);
 
 // Use the express-fileupload middleware
 app.use (fileUpload ());
 
 const storage = multer.diskStorage ({
-  destination (req, file, callback) {
-    callback (null, './images');
+  destination: function (req, file, cb) {
+    cb (null, './uploads');
   },
-  filename (req, file, callback) {
-    callback (null, `${file.fieldname}_${Date.now ()}_${file.originalname}`);
+  filename: function (req, file, cb) {
+    cb (null, file.originalname);
   },
 });
 
-const upload = multer ({storage});
+const upload = multer ({storage: storage});
 
 app.listen (port, () => {
   console.log (`Server started at port ${port}`);

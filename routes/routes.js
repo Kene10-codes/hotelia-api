@@ -3,7 +3,13 @@ const Model = require ('../models/admin/register.js');
 
 const router = express.Router ();
 
-const {register, login, isAuth, staff} = require ('../controllers/auth');
+const {
+  register,
+  login,
+  isAuth,
+  staff,
+  allStaff,
+} = require ('../controllers/auth');
 
 // register endpoint
 router.post ('/register', register);
@@ -16,6 +22,9 @@ router.get ('/private', isAuth);
 
 // staff profile endpoint
 router.post ('/staff-upload', staff);
+
+// staff profile endpoint
+router.get ('/all-staff', allStaff);
 
 // get all staff
 // router.get('/get-staff', allStaff)
