@@ -108,7 +108,7 @@ const staff = (req, res, next) => {
             hotelName: req.body.hotelName,
             name: req.body.name,
             phone: req.body.phone,
-            passport: req.file.passport,
+            image: req.file.image,
             position: req.body.position,
             salary: req.body.salary,
             address: req.body.address,
@@ -141,6 +141,14 @@ const allStaff = async (req, res, next) => {
     });
 };
 
+const getStaff = async (req, res) => {
+  try {
+    const data = await staffModel.findById (req.params.id);
+    res.status (200).json (data);
+  } catch (e) {
+    res.status (500).json ({message: e.message});
+  }
+};
 const isAuth = (req, res, next) => {
   const authHeader = req.get ('Authorization');
   if (!authHeader) {
@@ -162,4 +170,4 @@ const isAuth = (req, res, next) => {
   }
 };
 
-module.exports = {register, login, isAuth, staff, allStaff};
+module.exports = {register, login, isAuth, staff, allStaff, getStaff};

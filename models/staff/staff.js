@@ -13,7 +13,7 @@ const staffSchema = new mongoose.Schema ({
     required: true,
     type: Number,
   },
-  passport: {
+  image: {
     required: true,
     type: String,
   },

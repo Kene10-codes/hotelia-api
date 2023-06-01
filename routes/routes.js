@@ -9,6 +9,7 @@ const {
   isAuth,
   staff,
   allStaff,
+  getStaff,
 } = require ('../controllers/auth');
 
 // register endpoint
@@ -26,16 +27,8 @@ router.post ('/staff-upload', staff);
 // staff profile endpoint
 router.get ('/all-staff', allStaff);
 
-// get all staff
-// router.get('/get-staff', allStaff)
-router.get ('/getOne/:id', async (req, res) => {
-  try {
-    const data = await Model.findById (req.params.id);
-    res.status (200).json (data);
-  } catch (e) {
-    res.status (500).json ({message: e.message});
-  }
-});
+// get a staff
+router.get ('/get-staff/:id', getStaff);
 
 router.patch ('/update/:id', async (req, res) => {
   try {
